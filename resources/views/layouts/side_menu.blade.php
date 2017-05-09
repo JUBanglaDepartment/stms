@@ -49,13 +49,6 @@
                     </li>
 
                     <li class="nav-item start ">
-                        <a href="<?php echo url('offer-courses');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Assign Course</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
                         <a href="<?php echo url('faculty/create');?>" class="nav-link ">
                             <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                             <span class="title">Create Faculty</span>

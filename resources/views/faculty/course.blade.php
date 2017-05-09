@@ -1,7 +1,7 @@
 
 <!-- BEGIN CONTENT BODY -->
 <div class="page-content">
-    <form class="form-horizontal" role="form" action="<?= url('assign-offered-course');?>" method="POST">
+    <form class="form-horizontal" role="form" action="<?= url('assign-course');?>" method="POST">
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <div class="form-body">
 
@@ -62,12 +62,13 @@
                                     <td>{{$course->course_category}}</td>
                                     <td>{{$course->course_credit}}</td>
                                     <td>{{$course->course_desc}}</td>
-                                    <td>sdfg</td>
+                                    <td><button class="btn red" type="submit">Add</button></td>
                                 </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

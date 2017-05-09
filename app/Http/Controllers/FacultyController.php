@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Faculty;
+use App\Models\Semester;
 use App\Models\SemesterCourseFaculty;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -102,12 +105,94 @@ class FacultyController extends Controller
 
     public function offeredCourses(Request $request)
     {
-        $semesterController = new SemesterController();
-        $offeredSemester = $semesterController->offeredSemester();
-        $offeredCourses = SemesterCourseFaculty::all();
+        $courses =  Course::all();
+        $semester = Semester::find($this->offeredSemester());
 
-        echo
+        $content = view('faculty/course')->with(['courses'=>$courses,'semester'=>$semester]);
+        return view('layouts/main_template')->with(['content'=>$content]);
+
     }
+
+    public function assignOfferedCourses(Request $request)
+    {
+        $offeredSemester = $this->offeredSemester();
+
+        // Need to make dynamic-----------
+        $facultyId = 6;
+
+        if(isset($_POST['all']))
+        {
+            $courses = Course::all();
+            foreach($courses as $course)
+            {
+                $data = SemesterCourseFaculty::where('semester_id', '=', $offeredSemester)
+                    ->where('course_id', '=', $course->id)
+                    ->first(['id']);
+                if(empty($data))
+                {
+                    $semisterCourse = new SemesterCourseFaculty;
+                    $semisterCourse->semester_id = $offeredSemester;
+                    $semisterCourse->course_id = $course->id;
+                    $semisterCourse->faculty_id = $facultyId;
+                    $semisterCourse->save();
+
+                    $request->session()->flash('alert-success', 'Courses was assigned Successfully!');
+                }
+            }
+        }
+        elseif(isset($_POST['offered']))
+        {
+            foreach($_POST['offered'] as $course)
+            {
+                $data = SemesterCourseFaculty::where('semester_id', '=', $offeredSemester)
+                    ->where('course_id', '=', $course)
+                    ->first(['id']);
+
+                if(empty($data))
+                {
+                    $semisterCourse = new SemesterCourseFaculty;
+                    $semisterCourse->semester_id = $offeredSemester;
+                    $semisterCourse->course_id = $course;
+                    $semisterCourse->faculty_id = $facultyId;
+                    $semisterCourse->save();
+
+                    $request->session()->flash('alert-success', 'Courses was assigned Successfully!');
+                }
+            }
+        }
+        else
+        {
+            $request->session()->flash('alert-danger', 'No courses was selected');
+        }
+
+        return redirect('take-courses');
+    }
+
+    private function currentSemester()
+    {
+        $semester = Semester::where('start_month','<=',Carbon::now())
+            ->where('is_active',1)->first();
+
+        if(isset($semester->id))
+        {
+            return $semester->id;
+        }
+        return null;
+    }
+
+    private function offeredSemester()
+    {
+        $semester = Semester::where('start_month','>=',Carbon::now())
+            ->where('is_active',0)->first();
+
+        if(isset($semester->id))
+        {
+            return $semester->id;
+        }
+        return null;
+    }
+
+
     /**
      * Display the specified resource.
      *

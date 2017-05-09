@@ -9,9 +9,8 @@ Route::get('/dash', 'DashboardController@dashboard');
 
 Route::get('/login', 'LoginController@LoginPage');
 
-Route::get('/offer-courses', 'SemesterController@offerCourses');
 Route::get('/take-courses', 'FacultyController@offeredCourses');
-Route::post('/assign-offered-course', 'SemesterController@assignOfferedCourses');
+Route::post('/assign-course', 'FacultyController@assignOfferedCourses');
 
 Route::get('/home', 'HomeController@index');
 Route::resource('/user', 'UserController');
