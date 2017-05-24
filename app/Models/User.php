@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+
     protected $table = 'users';
     protected $primaryKey = "id";
     protected $fillable = [
@@ -18,12 +19,12 @@ class User extends Model
 
     public function role()
     {
-        return $this->hasOne('App\Model\Role','id','role_id');
+        return $this->hasOne('App\Models\Role','id','role_id');
     }
 
     public function faculty()
     {
-        return $this->hasOne('App\Model\Faculty','user_id','id');
+        return $this->hasOne('App\Models\Faculty','user_id','id');
     }
 
     public function checkIfUserHasRole($need_role)
