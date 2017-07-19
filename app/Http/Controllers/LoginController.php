@@ -24,6 +24,11 @@ class LoginController extends Controller
      */
     public function loginPage()
     {
+        if(Auth::check())
+        {
+            return redirect()->intended('/dash');
+        }
+
         return view('user/loginPage');
     }
 
@@ -43,4 +48,9 @@ class LoginController extends Controller
         }
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->intended('/login');
+    }
 }

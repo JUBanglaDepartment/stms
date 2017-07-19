@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2017 at 09:16 AM
+-- Generation Time: Jun 13, 2017 at 07:00 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.0.15
 
@@ -299,7 +299,8 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `role_name`, `role_desc`, `is_active`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', NULL, 1, '2017-04-10 00:00:00', '2017-04-10 00:00:00'),
 (2, 'Faculty', NULL, 1, '2017-04-10 00:00:00', '2017-04-10 00:00:00'),
-(3, 'Student', NULL, 1, '2017-04-10 00:00:00', '2017-04-10 00:00:00');
+(3, 'Student', NULL, 1, '2017-04-10 00:00:00', '2017-04-10 00:00:00'),
+(4, 'Editor', NULL, 1, '2017-04-10 00:00:00', '2017-04-10 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -361,12 +362,10 @@ CREATE TABLE `semester_course_faculty` (
 --
 
 INSERT INTO `semester_course_faculty` (`id`, `semester_id`, `course_id`, `faculty_id`) VALUES
-(1, 1, 1, NULL),
-(2, 1, 3, NULL),
-(3, 1, 2, NULL),
-(4, 1, 4, NULL),
-(5, 1, 5, NULL),
-(6, 1, 6, NULL);
+(1, 1, 3, 6),
+(2, 1, 5, 6),
+(3, 1, 4, 6),
+(4, 1, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -427,6 +426,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role_id` int(11) NOT NULL,
   `is_aactive` tinyint(1) NOT NULL DEFAULT '1',
+  `remember_token` varchar(250) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
@@ -435,10 +435,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role_id`, `is_aactive`, `created_at`, `updated_at`) VALUES
-(1, 'a', '$2y$10$A8E1zRcMx/d/Dk0Wj7paXOrpp1LlS66cBlonbEosgul0B9f3oXvxi', 1, 1, '2017-04-15 10:44:50', '2017-04-15 10:44:50'),
-(8, 't1', '$2y$10$wQkVQUqUqEdxNEh5abpi2.Dwxn1o3pqBabBxz3ugRk51n8s.LdbZq', 2, 1, '2017-04-22 13:50:31', '2017-04-22 13:50:31'),
-(9, 'student1', '$2y$10$lqFmvtJxOY9mWGpq3ROOpeZGOgz.vhGlGI.iLv8Iw/2KHkUol4PCO', 3, 1, '2017-04-22 19:36:28', '2017-04-22 19:36:28');
+INSERT INTO `users` (`id`, `username`, `password`, `role_id`, `is_aactive`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'a', '$2y$10$A8E1zRcMx/d/Dk0Wj7paXOrpp1LlS66cBlonbEosgul0B9f3oXvxi', 1, 1, '2k747u3vC8Q5Fo0fMc4YGxXNkiaS9kjNxZsecIMfA7HtgmVn5kzNARWaZFzg', '2017-04-15 10:44:50', '2017-04-15 10:44:50'),
+(8, 't1', '$2y$10$wQkVQUqUqEdxNEh5abpi2.Dwxn1o3pqBabBxz3ugRk51n8s.LdbZq', 2, 1, NULL, '2017-04-22 13:50:31', '2017-04-22 13:50:31'),
+(9, 'student1', '$2y$10$lqFmvtJxOY9mWGpq3ROOpeZGOgz.vhGlGI.iLv8Iw/2KHkUol4PCO', 3, 1, NULL, '2017-04-22 19:36:28', '2017-04-22 19:36:28');
 
 --
 -- Indexes for dumped tables
@@ -667,7 +667,7 @@ ALTER TABLE `publications`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `role_menu`
 --
@@ -682,7 +682,7 @@ ALTER TABLE `semesters`
 -- AUTO_INCREMENT for table `semester_course_faculty`
 --
 ALTER TABLE `semester_course_faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `semester_course_student`
 --

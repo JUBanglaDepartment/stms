@@ -155,8 +155,8 @@
                                     <li class="divider"> </li>
 
                                     <li>
-                                        <a href="<?php echo url('login/logout');?>">
-                                            <i class="icon-key"></i> Log Out
+                                        <a href="{{ route('logout') }}">
+                                            <i class="icon-key"></i> Logout
                                         </a>
                                     </li>
                                 </ul>

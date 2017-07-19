@@ -27,6 +27,21 @@
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
+
+                    <li class="nav-item start ">
+                        <a href="<?php echo url('menu/create');?>" class="nav-link ">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                            <span class="title">Create Menu</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item start ">
+                        <a href="<?php echo url('menu/assign');?>" class="nav-link ">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                            <span class="title">Assign Menu</span>
+                        </a>
+                    </li>
+
                     <li class="nav-item start ">
                         <a href="<?php echo url('program/create');?>" class="nav-link ">
                             <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
