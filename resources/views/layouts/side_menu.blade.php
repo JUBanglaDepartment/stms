@@ -1,3 +1,12 @@
+<?php
+
+//echo "<pre/>";
+//print_r($_SESSION['roles']['role_name']);
+////print_r($_SESSION['menus']);
+//die;
+
+?>
+
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
     <!-- BEGIN SIDEBAR -->
@@ -12,9 +21,6 @@
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <ul class="page-sidebar-menu   " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-
-
-
             <?php  if(@$controller  == 'SendSMS' ){ ?> 
             <li class="nav-item start active open">
                 <?php } else{  ?>
@@ -23,117 +29,21 @@
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-book"></i>
                     <span class="selected"></span>
-                    <span class="title">Admin</span>
+                    <span class="title">{{$_SESSION['roles']->role_name}}</span>
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('menu/create');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Create Menu</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('menu/assign');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Assign Menu</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('program/create');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Create Program</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('course/create');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Create Course</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('semester/create');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Create Semester</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('faculty/create');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Create Faculty</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item start ">
-                        <a href="<?php echo url('student/create');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Create Student</span>
-                        </a>
-                    </li>
+                    ->sub menu will be here
                 </ul>
-            </li>
 
-            <li class="nav-item ">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-book"></i>
-                    <span class="title">Operator</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="<?php echo url('UnderConstruction/index');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Manage Faculty</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="<?php echo url('UnderConstruction/index');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Manage Students</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <li class="nav-item ">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-book"></i>
-                    <span class="title">Faculty</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="<?php echo url('take-courses');?>" class="nav-link ">
-                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                            <span class="title">Take Course</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <li class="nav-item ">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-book"></i>
-                    <span class="title">Student</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="<?php echo url('student/index');?>" class="nav-link ">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <span class="title">Add Contact</span>
-                        </a>
-                    </li>
-                </ul>
+                @foreach($_SESSION['menus'] as $menu)
+                <li class="nav-item start ">
+                    <a href="{{ url($menu->menu_url)}}" class="nav-link ">
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                        <span class="title">{{$menu->menu_title}}</span>
+                    </a>
+                </li>
+                @endforeach
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->
